@@ -1,0 +1,104 @@
+.group-table-wrap {
+    width: max-content;
+    position: relative;
+    .group-table-content-wrap {
+        .group-table-header-wrap {
+            &.fixed {
+                position: sticky;
+                top: 0;
+                z-index: 3;
+                // 底部阴影
+                &.shadow {
+                    &::after {
+                        position: absolute;
+                        right: 0;
+                        bottom: -8px;
+                        left: 0;
+                        height: 8px;
+                        background: linear-gradient(
+                            180deg,
+                            #dddddddd 0%,
+                            rgba(216, 216, 216, 0) 75%
+                        );
+                        content: "";
+                    }
+                }
+            }
+            .group-table-header {
+                margin-bottom: 12px;
+                border-top: 0.5px solid rgba(23, 31, 38, 0.1);
+                border-right: 0.5px solid rgba(23, 31, 38, 0.1);
+                border-left: 0.5px solid rgba(23, 31, 38, 0.1);
+                border-radius: 2px;
+                /* 滚动条 */
+                &::-webkit-scrollbar {
+                    height: 0;
+                }
+            }
+        }
+        .group-table-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            gap: 12px;
+            .group-box-wrap {
+                width: 100%;
+                position: absolute;
+                border: 1px solid rgba(23, 31, 38, 0.1);
+                border-radius: 4px;
+                // 分组的头部
+                .group-wrap-header {
+                    cursor: pointer;
+                    width: 100%;
+                    padding: 10px 4px;
+                    height: 42px;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    .arrow-icon {
+                        cursor: pointer;
+                        width: 16px;
+                        height: 16px;
+                        background: url("./icons/arrow.svg") no-repeat center;
+                        transform: rotate(0deg);
+                        transition: transform 0.2s;
+                    }
+                    .tag {
+                        font-size: 12px;
+                        font-weight: normal;
+                        padding: 2px 8px;
+                        border-radius: 4px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .total {
+                        font-size: 13px;
+                        font-weight: normal;
+                        color: rgba(23, 31, 38, 0.6);
+                    }
+                }
+                // 分组的内容
+                .group-wrap-body {
+                    position: relative;
+                    width: 100%;
+                    overflow-x: auto;
+                    overflow-y: hidden;
+                    // transition: height 0.1s;
+                }
+                &.open {
+                    .group-wrap-header {
+                        .arrow-icon {
+                            transform: rotate(90deg);
+                            transition: transform 0.2s;
+                        }
+                    }
+                    .group-wrap-body {
+                        border-top: 0.5px solid rgba(23, 31, 38, 0.1);
+                    }
+                }
+            }
+        }
+    }
+}

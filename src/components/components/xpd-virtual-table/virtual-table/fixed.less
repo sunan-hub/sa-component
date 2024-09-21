@@ -1,0 +1,45 @@
+// 阴影
+.fixed {
+    position: sticky;
+    z-index: 2;
+    &.last-fixed-left {
+        &.left-shadow {
+            &::after {
+                pointer-events: none;
+                position: absolute;
+                top: 0;
+                right: -8px;
+                bottom: -8px;
+                width: 8px;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    #b3babc 0%,
+                    rgba(216, 216, 216, 0) 75%
+                );
+                opacity: 0.3;
+                content: "";
+            }
+        }
+    }
+    &.last-fixed-right {
+        &.right-shadow {
+            &::before {
+                pointer-events: none;
+                position: absolute;
+                top: 0;
+                left: -8px;
+                width: 8px;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    #b3babc 0%,
+                    rgba(216, 216, 216, 0) 75%
+                );
+                transform: rotate(180deg);
+                opacity: 0.3;
+                content: "";
+            }
+        }
+    }
+}

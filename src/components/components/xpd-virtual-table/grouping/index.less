@@ -1,0 +1,72 @@
+.groupingWrap {
+    color: #000;
+    padding: 4px;
+    .title {
+        margin-bottom: 8px;
+        color: #171f26;
+        font-weight: normal;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        .infoIcon {
+            height: 16px;
+            width: 16px;
+            background: url("./icons/info.svg") no-repeat center center;
+        }
+    }
+    .contentWrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .deleteIcon {
+            width: 16px;
+            height: 16px;
+            background: url("./icons/delete-icon.svg") no-repeat center center;
+            background-size: 100% 100%;
+            cursor: pointer;
+        }
+    }
+    .clearAll {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 12px;
+        font-size: 13px;
+        font-weight: normal;
+        cursor: pointer;
+        color: rgba(23, 31, 38, 0.6);
+    }
+}
+
+.btn {
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    &:hover {
+        background: rgba(46, 61, 77, 0.08);
+    }
+    &.active {
+        background: #e6f4ff;
+        .groupingIcon {
+            background: url("./icons/grouping-blue.svg") no-repeat;
+        }
+        .text {
+            color: #0068ff;
+        }
+    }
+
+    .groupingIcon {
+        width: 16px;
+        height: 16px;
+        background: url("./icons/grouping.svg") no-repeat;
+        background-size: 100% 100%;
+    }
+    .text {
+        font-size: 13px;
+        font-weight: normal;
+        color: #171f26;
+    }
+}

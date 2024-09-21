@@ -1,0 +1,19 @@
+.checkbox-wrap {
+    cursor: pointer;
+    .checkbox {
+        width: 24px;
+        height: 24px;
+        background-size: 80% 80%;
+        background-repeat: no-repeat;
+        background-position: center;
+        &.checked {
+            background-image: url("./icons/star-checked-all.svg");
+        }
+        &.half {
+            background-image: url("./icons/star-checked-half.svg");
+        }
+        &.unchecked {
+            background-image: url("./icons/star-unchecked.svg");
+        }
+    }
+}

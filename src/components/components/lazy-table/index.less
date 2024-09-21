@@ -1,0 +1,116 @@
+.lazyTableWrap {
+    position: relative;
+    border-top: 0.5px solid rgba(23, 31, 38, 0.1);
+    border-right: 0.5px solid rgba(23, 31, 38, 0.1);
+    border-bottom: 0.5px solid rgba(23, 31, 38, 0.1);
+    border-left: 0.5px solid rgba(23, 31, 38, 0.1);
+    // 表头
+    .lazyTableHeader {
+        display: flex;
+        width: max-content;
+        background: #f4f6f8;
+        &.fixed {
+            position: sticky;
+            top: 0;
+            z-index: 3;
+            // 底部阴影
+            &.shadow {
+                &::after {
+                    position: absolute;
+                    right: 0;
+                    bottom: -12px;
+                    left: 0;
+                    height: 12px;
+                    background: linear-gradient(180deg, #dddddddd 0%, rgba(216, 216, 216, 0) 75%);
+                    content: '';
+                }
+            }
+        }
+        .headerCellWrap {
+            display: flex;
+            flex-direction: column;
+            background: #f4f6f8;
+            &.fixed {
+                position: sticky;
+            }
+            .childrenCellWrap {
+                display: flex;
+            }
+            .cell {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 0 8px;
+                border-right: 0.5px solid rgba(23, 31, 38, 0.1);
+                border-bottom: 0.5px solid rgba(23, 31, 38, 0.1);
+            }
+        }
+    }
+
+    // 表体
+    .lazyTableBody {
+        .lazyTableRow {
+            display: flex;
+            width: 100%;
+            min-width: max-content;
+            .cell {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #fff;
+                padding: 0 8px;
+                border-right: 0.5px solid rgba(23, 31, 38, 0.1);
+                border-bottom: 0.5px solid rgba(23, 31, 38, 0.1);
+                &.fixed {
+                    position: sticky;
+                }
+                &.left {
+                    justify-content: flex-start;
+                }
+                &.right {
+                    justify-content: flex-end;
+                }
+                &.center {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
+
+// 阴影
+.fixed {
+    position: sticky;
+    z-index: 2;
+    &.lastFixed-left {
+        &.leftShadow {
+            &::after {
+                position: absolute;
+                top: 0;
+                right: -12px;
+                bottom: -12px;
+                width: 12px;
+                height: 100%;
+                background: linear-gradient(90deg, #b3babc 0%, rgba(216, 216, 216, 0) 75%);
+                opacity: 0.3;
+                content: '';
+            }
+        }
+    }
+    &.lastFixed-right {
+        &.rightShadow {
+            &::before {
+                position: absolute;
+                top: 0;
+                left: -13px;
+                width: 12px;
+                height: 100%;
+                background: linear-gradient(90deg, #b3babc 0%, rgba(216, 216, 216, 0) 75%);
+                transform: rotate(180deg);
+                opacity: 0.3;
+                content: '';
+            }
+        }
+    }
+}

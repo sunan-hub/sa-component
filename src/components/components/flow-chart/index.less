@@ -1,0 +1,67 @@
+.flow-chart-wrap {
+    position: relative;
+    overflow: hidden;
+    &.drag {
+        cursor: grab;
+    }
+    // 操作按钮区域
+    .flow-chart-operate {
+        gap: 4px;
+        z-index: 4;
+        position: sticky;
+        align-items: center;
+        left: 20px;
+        top: 20px;
+        display: inline-flex;
+        background: #ffffff;
+        border-radius: 4px;
+        padding: 4px;
+        box-shadow: 0 2px 4px 0 rgba(66, 66, 66, 0.1);
+        .icon {
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            cursor: pointer;
+            &.add {
+                background-image: url("./imgs/add.svg");
+            }
+            &.minus {
+                background-image: url("./imgs/minus.svg");
+            }
+            &.grab {
+                background-image: url("./imgs/grab.svg");
+                &.active {
+                    border-radius: 2px;
+                    background-color: #5eb2ff;
+                }
+            }
+            &.location {
+                background-image: url("./imgs/location.svg");
+            }
+        }
+        .scale {
+            color: #8a8a8a;
+            font-size: 12px;
+        }
+    }
+    .flow-chart-content {
+        left: 0;
+        top: 0;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // 线的样式
+        .org-connection {
+            &:hover {
+                z-index: 2;
+            }
+        }
+        // 节点的样式
+        .node {
+            position: absolute;
+            background-color: rgb(0, 163, 49);
+            z-index: 3;
+        }
+    }
+}

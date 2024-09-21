@@ -1,0 +1,112 @@
+.pn-upload {
+    .ant-upload.ant-upload-drag {
+        padding: 24px 24px;
+        background: #fff;
+        .ant-upload-drag-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: normal;
+            font-size: 12px;
+            .upload-icon {
+                width: 32px;
+                height: 32px;
+                margin-bottom: 12px;
+                background: url(./icons/upload.svg) no-repeat center center;
+            }
+            .explain {
+                margin-bottom: 12px;
+                color: #171f26;
+            }
+            .tips {
+                color: rgba(23, 31, 38, 0.6);
+            }
+        }
+    }
+
+    .file-list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-top: 12px;
+        .file-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+            // margin-right: 12px;
+            margin-bottom: 12px;
+            background: #f5f6fa;
+            &:last-child {
+                margin-right: 0;
+            }
+            .icon-name {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                padding: 6px;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+                svg {
+                    font-size: 18px;
+                }
+                .file-name {
+                    flex: 1;
+                    margin-left: 4px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    cursor: pointer;
+                }
+            }
+            .file-operate {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-right: 2px;
+                .operate-icon {
+                    display: flex;
+                    align-items: center;
+                    padding: 6px;
+                    cursor: pointer;
+                    svg {
+                        color: #979797;
+                        cursor: pointer;
+                    }
+                }
+            }
+            // 进度条
+            .progress {
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                .progress-inner {
+                    height: 100%;
+                    background: #005ae0;
+                    border-radius: 0 2px 2px 0;
+                }
+            }
+        }
+        .no-data-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 80px;
+            color: rgba(23, 31, 38, 0.3);
+            font-weight: normal;
+            font-size: 13px;
+            .no-data-icon {
+                width: 124px;
+                height: 100px;
+                margin-bottom: 8px;
+                background: url(./icons/no-data-icon.svg) no-repeat center center;
+            }
+        }
+    }
+}

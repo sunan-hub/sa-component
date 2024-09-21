@@ -1,0 +1,192 @@
+.org_component_wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    // 线的样式
+    .org-connection {
+        // stroke: #d1d4e0;
+        &:hover {
+            z-index: 2;
+        }
+    }
+    // 添加节点按钮
+    .add_node_icon {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        color: rgb(161, 161, 161);
+        justify-content: center;
+        font-size: 30px;
+        background-color: transparent;
+        border-right: 1px dashed rgb(206, 206, 206);
+        border-left: none;
+        border-bottom: 1px dashed rgb(206, 206, 206);
+        border-top: none;
+        cursor: pointer;
+        &.add_node_icon_highlight {
+            background-color: #8cff8c;
+            z-index: 3;
+        }
+        &.add_node_icon_top {
+            border-top: 1px dashed rgb(206, 206, 206);
+        }
+        &.add_node_icon_left {
+            border-left: 1px dashed rgb(206, 206, 206);
+        }
+        &:hover {
+            color: rgb(32, 128, 255);
+            background-color: rgb(230, 243, 255);
+            border: 2px solid rgb(64, 163, 255);
+            .add_icon_img {
+                width: 100%;
+                height: 100%;
+                background-image: url("./icons/add-icon-hover.svg");
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+    }
+    .node_wrap {
+        position: absolute;
+        z-index: 2;
+        // transform: translate(calc(-50% + 20px), calc(-50% + 20px));
+        &:hover {
+            &.node_wrap_edit {
+                animation: shadow 1s infinite;
+                cursor: grab;
+            }
+        }
+        .node_anchor {
+            position: absolute;
+            z-index: 4;
+            width: 10px;
+            height: 10px;
+            background-color: #0068ff;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            cursor: pointer;
+            &:hover {
+                width: 16px;
+                height: 16px;
+                background-color: #fff;
+                border: 1px solid #0068ff;
+                &::after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    width: 12px;
+                    height: 12px;
+                    background-color: #0068ff;
+                    border-radius: 50%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+            &.node_anchor_top {
+                top: 0;
+                right: 50%;
+                transform: translate(50%, -50%);
+            }
+            &.node_anchor_right {
+                top: 50%;
+                right: 0;
+                transform: translate(50%, -50%);
+            }
+            &.node_anchor_bottom {
+                right: 50%;
+                bottom: 0;
+                transform: translate(50%, 50%);
+            }
+            &.node_anchor_left {
+                top: 50%;
+                left: 0;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    // 暂无数据
+    .no-data {
+        width: 300px;
+        height: 240px;
+        // 元素不对指针做出反
+        pointer-events: none;
+    }
+}
+
+// 临时连接点
+#temp_node {
+    position: absolute;
+    z-index: -1;
+    display: none;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+// 临时连接线
+#temp_connection {
+    position: absolute;
+    z-index: 100;
+    width: 1px;
+    height: 1px;
+    background-color: #498cff;
+    transform-origin: left; // 旋转中心
+    pointer-events: none;
+    // 尾部箭头
+    &::after {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 10px solid #498cff;
+        transform: translate(2px, -50%);
+        content: "";
+        pointer-events: none;
+    }
+}
+
+// 删除按钮
+.delete_icon {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #a4a8ad;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: url("./icons/delete-icon.svg");
+    background-size: 56%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+    &.delete_node_icon {
+        top: 0;
+        right: 0;
+    }
+    &.delete_line_icon {
+    }
+    &:hover {
+        z-index: 4;
+        border: 1px solid #0068ff;
+        background-image: url("./icons/delete-icon-hover.svg");
+    }
+}
+
+// 闪烁的阴影动画
+@keyframes shadow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(102, 168, 254, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 0 6px rgba(126, 182, 255, 0.05);
+    }
+}
