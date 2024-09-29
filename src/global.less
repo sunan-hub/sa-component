@@ -1,0 +1,33 @@
+* {
+    font-family: "PingFang SC";
+}
+
+/* 全局滚动条 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: hsla(0, 0%, 70.2%, 0.6);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+/* 需要输入框圆角的类名 */
+.input-border-radius {
+    .ant-input-number,
+    .ant-input,
+    .ant-input-affix-wrapper,
+    .ant-picker,
+    .ant-select-selector {
+        border-radius: 4px !important;
+    }
+}
+
+html,
+body {
+    min-height: 100vh;
+}

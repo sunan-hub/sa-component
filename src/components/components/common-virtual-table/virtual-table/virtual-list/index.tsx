@@ -1,6 +1,6 @@
 import useScrollOffset from "@/hooks/use-scroll-offset";
 import { useMemo, useRef, useState } from "react";
-import "./index.less";
+import styles from "./index.less";
 
 export type RenderVirtualWrapParamsType = {
     /** 滚动区域的ref */
@@ -80,18 +80,18 @@ const VirtualList = (props: VirtualListProps) => {
 
     return (
         <div
-            className={`virtual-list-wrap ${props.wrapClassName}`}
+            className={`${styles["virtual-list-wrap"]} ${props.wrapClassName}`}
             ref={props.scrollAreaRef || scrollAreaRef}
             style={{ maxHeight: props.visibleHeight }}
         >
             {/* 填充区域 */}
             <div
-                className={`fill-area ${props.fillClassName}`}
+                className={`${styles["fill-area"]} ${props.fillClassName}`}
                 style={{ height: props.dataList.length * props.itemHeight }}
             >
                 {/* 可视区域 */}
                 <div
-                    className={`viewport ${props.viewportClassName}`}
+                    className={`${styles.viewport} ${props.viewportClassName}`}
                     style={{
                         transform: `translateY(${
                             finialStartIndex * props.itemHeight

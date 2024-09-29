@@ -1,5 +1,6 @@
+import type { CheckedType } from "./checkbox";
 import { VirtualTablePropsType } from "../const";
-import Checkbox, { type CheckedType } from "./checkbox";
+import Checkbox from "./checkbox";
 
 /** 封装表格Checkbox */
 const TableCheckbox = (props: {

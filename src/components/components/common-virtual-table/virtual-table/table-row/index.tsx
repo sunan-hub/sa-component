@@ -1,5 +1,5 @@
 import { ShadowPositionType, VirtualColumnsType } from "../const";
-import "./index.less";
+import styles from "./index.less";
 
 /** 表格单元格 */
 const TableCell = (props: {
@@ -12,11 +12,13 @@ const TableCell = (props: {
     return (
         <div
             key={column.dataIndex}
-            className={`cell ${column.fixed ? "fixed" : ""} ${
-                column.isLastFixed ? "last-fixed-" + column.isLastFixed : ""
-            } ${shadowPosition.includes("left") ? "left-shadow" : ""} ${
-                shadowPosition.includes("right") ? "right-shadow" : ""
-            } ${column.align || "left"}`}
+            className={`${styles.cell} ${column.fixed ? styles.fixed : ""} ${
+                column.isLastFixed
+                    ? styles["last-fixed-" + column.isLastFixed]
+                    : ""
+            } ${shadowPosition.includes("left") ? styles["left-shadow"] : ""} ${
+                shadowPosition.includes("right") ? styles["right-shadow"] : ""
+            } ${column.align ? styles[column.align] : styles.left}`}
             style={{
                 width: column.width,
                 left: column.left,
@@ -42,7 +44,10 @@ const TableRow = (props: {
         props;
 
     return (
-        <div className={`virtual-table-row ${className || ''}`} style={style}>
+        <div
+            className={`${styles["virtual-table-row"]} ${className || ""}`}
+            style={style}
+        >
             {columns?.map(
                 (column) =>
                     column.children?.map((child) => {

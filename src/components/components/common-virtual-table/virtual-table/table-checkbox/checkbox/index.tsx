@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./index.less";
+import styles from "./index.less";
 
 /** 选择状态：选中、半选、未选 */
 export type CheckedType = "checked" | "half" | "unchecked";
@@ -47,9 +47,13 @@ const Checkbox = (props: CheckboxProps) => {
     }, [value]);
 
     return (
-        <div className="checkbox-wrap" onClick={handleClick}>
+        <div className={styles["checkbox-wrap"]} onClick={handleClick}>
             {children?.(value || checked) || (
-                <div className={`checkbox ${className} ${value || checked}`} />
+                <div
+                    className={`${styles.checkbox} ${className} ${
+                        styles[value || ""] || styles[checked]
+                    }`}
+                />
             )}
         </div>
     );

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import type { ShadowPositionType, VirtualColumnsType } from "../const";
 import lodash from "lodash";
-import "./index.less";
+import styles from "./index.less";
 
 /** 传入某一列的偏移量，子集要递归去平分偏移量 */
 const calcChildrenOffset = (pa: {
@@ -157,22 +157,32 @@ const Header = (props: {
                     left: column.left,
                     right: column.right,
                 }}
-                className={`header-cell-wrap ${column.fixed ? "fixed" : ""} ${
-                    column.isLastFixed ? "last-fixed-" + column.isLastFixed : ""
-                } ${shadowPosition.includes("left") ? "left-shadow" : ""} ${
-                    shadowPosition.includes("right") ? "right-shadow" : ""
+                className={`${styles["header-cell-wrap"]} ${
+                    column.fixed ? styles.fixed : ""
+                } ${
+                    column.isLastFixed
+                        ? styles["last-fixed-" + column.isLastFixed]
+                        : ""
+                } ${
+                    shadowPosition.includes("left") ? styles["left-shadow"] : ""
+                } ${
+                    shadowPosition.includes("right")
+                        ? styles["right-shadow"]
+                        : ""
                 }`}
             >
                 {/* 把手 */}
                 <div
-                    className="handle"
+                    className={styles.handle}
                     onMouseDown={(e) => {
                         mouseDownColumn.current = column.dataIndex;
                         handleMouseDown(e);
                     }}
                 />
                 <div
-                    className={`cell ${column.align || "left"}`}
+                    className={`${styles.cell} ${
+                        styles[column.align || ""] || styles.left
+                    }`}
                     style={{
                         width: column.width,
                         minWidth: column.width,
@@ -181,7 +191,7 @@ const Header = (props: {
                     {column.title}
                 </div>
                 {column.children && (
-                    <div className="children-cell-wrap">
+                    <div className={styles["children-cell-wrap"]}>
                         <Header
                             columns={column.children}
                             fullColumns={fullColumns || columns}
@@ -233,9 +243,11 @@ const TableHeader = (props: TableHeaderProps) => {
     return (
         <div
             ref={headerRef}
-            className={`virtual-table-header ${fixedHeader ? "fixed" : ""} ${
-                shadowPosition.includes("top") ? "shadow" : ""
-            } ${props.className || ""}`}
+            className={`${styles["virtual-table-header"]} ${
+                fixedHeader ? styles.fixed : ""
+            } ${shadowPosition.includes("top") ? styles.shadow : ""} ${
+                props.className || ""
+            }`}
             style={style}
         >
             <Header

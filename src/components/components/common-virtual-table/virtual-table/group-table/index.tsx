@@ -1,8 +1,10 @@
 import { useMemo, useRef, useState } from "react";
+import type {
+    ShadowPositionType,
+    VirtualColumnsType,
+    VirtualTablePropsType,
+} from "../const";
 import {
-    type ShadowPositionType,
-    type VirtualColumnsType,
-    type VirtualTablePropsType,
     addOffset,
     calcFixedPosition,
     calcTableWidth,
@@ -13,7 +15,7 @@ import TableCheckbox from "../table-checkbox";
 import TableRow from "../table-row";
 import lodash from "lodash";
 import useScrollOffset from "@/hooks/use-scroll-offset";
-import "./index.less";
+import styles from "./index.less";
 
 /** 表头默认高度 */
 const DefaultHeaderHeight = 60;
@@ -74,6 +76,8 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
     const tableRef = useRef<HTMLDivElement>(null);
     /** 表头的ref */
     const headerRef = useRef<HTMLDivElement>(null);
+    /** 虚拟滚动条的ref */
+    const scrollBarRef = useRef<HTMLDivElement>(null);
     /** 阴影位置 */
     const [shadowPosition, setShadowPosition] = useState<ShadowPositionType[]>(
         []
@@ -200,6 +204,8 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
                 if (groupRef.current[key])
                     groupRef.current[key]!.scrollLeft = eventTarget.scrollLeft;
             });
+            if (scrollBarRef.current)
+                scrollBarRef.current.scrollLeft = eventTarget.scrollLeft;
         },
         ref: headerRef,
     });
@@ -210,7 +216,7 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
         if (headerRef.current) headerRef.current.scrollLeft = target.scrollLeft;
     };
 
-    // table滚动，判断哪些分组需要隐藏
+    /** table滚动，判断哪些分组需要隐藏 */
     const handleTableScroll = (event: React.UIEvent<HTMLDivElement>) => {
         const eventTarget = event.target as HTMLDivElement;
         setTableScrollTop(eventTarget.scrollTop);
@@ -220,24 +226,24 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
         <div
             ref={props.tableRef || tableRef}
             onScroll={handleTableScroll}
-            className="group-table-wrap"
+            className={styles["group-table-wrap"]}
             style={{
                 maxWidth: props.scroll.x,
                 maxHeight: props.scroll?.y,
                 overflow: "auto",
             }}
         >
-            <div className="group-table-content-wrap">
+            <div className={styles["group-table-content-wrap"]}>
                 {/* 表头 */}
                 <div
-                    className={`group-table-header-wrap ${
-                        props.fixedHeader ? "fixed" : ""
-                    } ${tableScrollTop ? "shadow" : ""}`}
+                    className={`${styles["group-table-header-wrap"]} ${
+                        props.fixedHeader ? styles.fixed : ""
+                    } ${tableScrollTop ? styles.shadow : ""}`}
                 >
                     <TableHeader
                         headerRef={headerRef}
                         columns={columns}
-                        className="group-table-header"
+                        className={styles["group-table-header"]}
                         shadowPosition={shadowPosition}
                         fixedHeader={props.fixedHeader}
                         setColumnOffset={setColumnOffset}
@@ -252,7 +258,7 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
 
                 {/* 表格内容 */}
                 <div
-                    className="group-table-content"
+                    className={styles["group-table-content"]}
                     style={{
                         height: getContentHeight({
                             rowHeight: props.rowHeight,
@@ -277,20 +283,22 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
                         return (
                             <div
                                 key={item.key}
-                                className={`group-box-wrap ${
-                                    expandGroup.includes(item.key) ? "open" : ""
+                                className={`${styles["group-box-wrap"]} ${
+                                    expandGroup.includes(item.key)
+                                        ? styles.open
+                                        : ""
                                 }`}
                                 style={{ top: groupTop.key[item.key] }}
                             >
                                 <div
-                                    className="group-wrap-header"
+                                    className={styles["group-wrap-header"]}
                                     onClick={() => {
                                         handleGroupHeaderClick(item.key);
                                     }}
                                 >
-                                    <div className="arrow-icon" />
+                                    <div className={styles["arrow-icon"]} />
                                     <div
-                                        className="tag"
+                                        className={styles.tag}
                                         style={{
                                             backgroundColor:
                                                 getRandomColor().bgColor,
@@ -299,13 +307,13 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
                                     >
                                         {item.key}
                                     </div>
-                                    <div className="total">
+                                    <div className={styles.total}>
                                         共{item.data?.length}个
                                     </div>
                                 </div>
                                 <div
                                     onScroll={groupScroll}
-                                    className="group-wrap-body"
+                                    className={styles["group-wrap-body"]}
                                     ref={(ref) => {
                                         groupRef.current[item.key] =
                                             ref || undefined;
@@ -319,7 +327,7 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
                                     }}
                                 >
                                     <div
-                                        className="placeholder"
+                                        className={styles.placeholder}
                                         style={{
                                             width: tableWidth,
                                             height: 1,
@@ -363,6 +371,13 @@ const GroupVirtualTable = (props: GroupVirtualTableProps) => {
                         );
                     })}
                 </div>
+            </div>
+            <div
+                ref={scrollBarRef}
+                onScroll={groupScroll}
+                className={styles["group-table-content-scroll-y"]}
+            >
+                <div className={styles.inner} style={{ width: tableWidth }} />
             </div>
         </div>
     );

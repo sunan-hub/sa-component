@@ -1,12 +1,10 @@
-import { Tabs } from "antd"
-import VirtualTableTest from "./virtual-table-test";
-import styles from './index.less';
+import { Tabs } from "antd";
 import { useState } from "react";
+import VirtualTableTest from "./virtual-table-test";
+import styles from "./index.less";
 
 /** 测试组件列表 */
-const ComponentItems = [
-    { label: '性能表格测试', key: 'table' }
-]
+const ComponentItems = [{ label: "性能表格测试", key: "table" }];
 
 const IndexPage = () => {
     /** 当前选择的页面 */
@@ -18,6 +16,6 @@ const IndexPage = () => {
             {currentTab == "table" && <VirtualTableTest />}
         </div>
     );
-}
+};
 
-export default IndexPage
+export default IndexPage;
